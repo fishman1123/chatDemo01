@@ -1,4 +1,4 @@
-// import OpenAI from 'openai';
+//import OpenAI from 'openai';
 const myApiKey = process.env.API_KEY; //YOU MUST DESIGNATE ENVIRONMENT VARIABLE
 const OpenAI = require('openai');
 
@@ -6,7 +6,16 @@ const openai = new OpenAI({
     apiKey: myApiKey// default is process.env['OPENAI_API_KEY']
 });
 
-async function main() {
+//Express
+const express = require('express')
+const app = express()
+//CORS
+const cors = require('cors')
+
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+
+app.get('/professorFish', async function (req, res) {
     const completion = await openai.chat.completions.create({
         messages: [
             {
@@ -25,16 +34,19 @@ async function main() {
                 role: "assistant",
                 content: "Answer my question first, do you late to class often?",
             },
-            { role: "user", content: "Not really, but who's asking?" }, //user comment must ends in the last
+            { role: "user", content: "Not really, but who's asking?" }, //user comment must be the last in the end
         ],
         model: "gpt-3.5-turbo",
     });
 
-    console.log(completion.choices[0]);
-}
+    // console.log(completion.choices[0]);
+    let fish = completion.choices[0].message['content'];//this is how you get message only
+    console.log(fish);
+    res.send(fish);
 
-main();
 
-// {"role": "user", "content": "Who won the world series in 2020?"},
-// {"role": "assistant", "content": "The Los Angeles Dodgers won the World Series in 2020."},
-// {"role": "user", "content": "Where was it played?"}
+} )
+
+
+
+app.listen(3003)
