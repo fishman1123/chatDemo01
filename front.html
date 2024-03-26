@@ -1,36 +1,117 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat UI</title>
+    <style>
+        /* Your Button CSS */
+        .button-54 {
+            font-family: "Open Sans", sans-serif;
+            font-size: 16px;
+            letter-spacing: 2px;
+            text-decoration: none;
+            text-transform: uppercase;
+            color: #000;
+            cursor: pointer;
+            border: 3px solid;
+            padding: 0.25em 0.5em;
+            box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px, 5px 5px 0px 0px;
+            position: relative;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+        }
+
+        .button-54:active {
+            box-shadow: 0px 0px 0px 0px;
+            top: 5px;
+            left: 5px;
+        }
+
+        @media (min-width: 768px) {
+            .button-54 {
+                padding: 0.25em 0.75em;
+            }
+        }
+
+        /* Additional CSS for Chat UI */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: "Open Sans", sans-serif;
+        }
+
+        .chat-container {
+            width: 300px;
+            border: 1px solid #000000;
+            padding: 10px;
+        }
+
+        .message-area {
+            border: 1px solid #000000;
+            padding: 10px;
+            margin-bottom: 10px;
+            height: 150px;
+            overflow-y: auto;
+        }
+
+        .input-area {
+            display: flex;
+            gap: 10px;
+        }
+
+        .chat-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #000000;
+        }
+    </style>
 </head>
 <body>
-<button onclick="postProfessorFish()">요청하기</button>
+<div class="chat-container">
+    <div class="message-area" id="messageArea">
+        <!-- Messages will be displayed here -->
+    </div>
+    <div class="input-area">
+        <input type="text" class="chat-input" id="chatInput" placeholder="Type a message...">
+        <button class="button-54" onclick="postProfessorFish()">Send</button>
+    </div>
+</div>
 <script>
     async function postProfessorFish() {
         try {
+            const input = document.getElementById('chatInput');
+            const message = input.value; // Get the message from the input
             const response = await fetch('http://localhost:3003/professorFish', {
-                method: 'POST', // Specify the method
+                method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json', // Specify the content type in the headers
+                    'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({name : 'John'}), // Convert the JavaScript object to a JSON string
+                body: JSON.stringify({message}), // Send the message content
             });
 
             if (!response.ok) {
-                // If the response is not 2xx, throw an error
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
 
-            const responseData = await response.json(); // Assuming the server responds with JSON
+            const responseData = await response.json();
+            displayMessage(responseData.assistant); // Display response in the chat
+            input.value = ''; // Clear the input field
         } catch (error) {
-            console.error('Error:', error); // Log any errors to the console
+            console.error('Error:', error);
         }
     }
-</script>
 
+    function displayMessage(message) {
+        const messageArea = document.getElementById('messageArea');
+        const messageElement = document.createElement('div');
+        messageElement.textContent = message;
+        messageArea.appendChild(messageElement);
+    }
+</script>
 </body>
 </html>
