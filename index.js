@@ -6,6 +6,10 @@ const openai = new OpenAI({
     apiKey: myApiKey// default is process.env['OPENAI_API_KEY']
 });
 
+//morgan
+// const morgan = require('morgan');
+
+
 //Express
 const express = require('express')
 const app = express()
@@ -15,7 +19,7 @@ const cors = require('cors')
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
-app.get('/professorFish', async function (req, res) {
+app.post('/professorFish', async function (req, res) {
     const completion = await openai.chat.completions.create({
         messages: [
             {
@@ -42,7 +46,7 @@ app.get('/professorFish', async function (req, res) {
     // console.log(completion.choices[0]);
     let fish = completion.choices[0].message['content'];//this is how you get message only
     console.log(fish);
-    res.send(fish);
+    res.json({"assistant" : fish});
 
 
 } )

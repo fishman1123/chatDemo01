@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<button onclick="postProfessorFish()">요청하기</button>
+<script>
+    async function postProfessorFish() {
+        try {
+            const response = await fetch('http://localhost:3003/professorFish', {
+                method: 'POST', // Specify the method
+                headers: {
+                    'Content-Type': 'application/json', // Specify the content type in the headers
+                },
+                body: JSON.stringify({name : 'John'}), // Convert the JavaScript object to a JSON string
+            });
+
+            if (!response.ok) {
+                // If the response is not 2xx, throw an error
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const responseData = await response.json(); // Assuming the server responds with JSON
+        } catch (error) {
+            console.error('Error:', error); // Log any errors to the console
+        }
+    }
+</script>
+
+</body>
+</html>
