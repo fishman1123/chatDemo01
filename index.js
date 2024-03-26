@@ -18,6 +18,7 @@ const cors = require('cors')
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
+app.use(cors())
 
 app.post('/professorFish', async function (req, res) {
     const completion = await openai.chat.completions.create({
