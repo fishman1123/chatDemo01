@@ -1,7 +1,10 @@
 document.addEventListener('DOMContentLoaded', (event) => {
     // Optionally, display an initial message from Professor Fish if needed
-    // displayMessage("Professor Fish: Hello, I'm Professor Fish. Do you often arrive late to class?", "assistant");
+    displayMessage("Professor Fish: Hello, I'm Professor Fish. Do you often arrive late to class?", "assistant");
 });
+
+let userMessages = [];
+let assistantMessages = [];
 
 async function sendMessage() {
     const input = document.getElementById('chatInput');
@@ -11,14 +14,17 @@ async function sendMessage() {
 
     // Display the user's message in the chat UI immediately
     displayMessage(`You: ${message}`, "user");
-
+    userMessages.push(message);
     try {
         const response = await fetch('http://localhost:3003/professorFish', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ message }), // Send the message content
+            body: JSON.stringify({
+                userMessages: userMessages, // Assuming this is intended to be a single message or the last message
+                assistantMessages: assistantMessages, // Assuming this should actually be the last assistant message or similar
+            }), // Send the message content
         });
 
         if (!response.ok) {
@@ -28,11 +34,13 @@ async function sendMessage() {
         const responseData = await response.json();
         // Display the AI's response in the chat UI
         displayMessage(`Professor Fish: ${responseData.assistant}`, "assistant");
+        assistantMessages.push(responseData.assistant); // Assuming assistantMessages is an array tracking the conversation
         input.value = ''; // Clear the input field
     } catch (error) {
         console.error('Error:', error);
         displayMessage("Error: Could not get a response. Please try again.", "error");
     }
+
 }
 
 function displayMessage(message, sender) {
