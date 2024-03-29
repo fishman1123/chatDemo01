@@ -69,11 +69,37 @@
             padding: 10px;
             border: 1px solid #000000;
         }
+
+        .fixed-size-image {
+            width: 300px;
+            height: auto;
+        }
+
+        .intro-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-content: center;
+        }
+
+        .intro-container img {
+            width: 50%;
+            min-width: 250px;
+            max-width: 300px;
+
+        }
     </style>
 
 </head>
 <body>
-<div class="chat-container">
+<div id="intro" class="intro-container">
+    <h1>공감과 감성의 대가, 피쉬 교수</h1>
+    <h2 style="font-weight: bold; font-style: italic;">" 이세상 사람들이 F가 될때까지 "</h2>
+    <img src="./image/einstein.jpg" class="fixed-size-image" alt="portrait of professor fish">
+</div>
+
+
+<div class="chat-container" style="display: none">
     <div class="message-area" id="messageArea">
         <!-- Messages will be displayed here -->
     </div>
