@@ -4,198 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>해리의 뜨거운 집착</title>
-    <style>
-        /* Your Button CSS */
-        .button-54 {
-            font-family: "Open Sans", sans-serif;
-            font-size: 16px;
-            letter-spacing: 2px;
-            text-decoration: none;
-            text-transform: uppercase;
-            color: #000;
-            cursor: pointer;
-            border: 3px solid;
-            padding: 0.25em 0.5em;
-            box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px, 5px 5px 0px 0px;
-            position: relative;
-            user-select: none;
-            -webkit-user-select: none;
-            touch-action: manipulation;
-        }
-
-        .button-54:active {
-            box-shadow: 0px 0px 0px 0px;
-            top: 5px;
-            left: 5px;
-        }
-
-        @media (min-width: 768px) {
-            .button-54 {
-                padding: 0.25em 0.75em;
-            }
-        }
-
-        /* Additional CSS for Chat UI */
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column; /* Adjusted for vertical alignment of all child elements */
-            height: 100vh;
-            margin: 0;
-            font-family: "Open Sans", sans-serif;
-        }
-
-        .chat-container {
-            width: 600px;
-            border: 1px solid #000000;
-            padding: 10px;
-        }
-
-        .message-area {
-            width: 78%; /* Adjusted for consistent width */
-            border: 1px solid #000000;
-            padding: 10px;
-            margin-bottom: 10px;
-            height: 200px;
-            overflow-y: auto;
-        }
-
-        .input-area {
-            display: flex;
-            gap: 10px;
-        }
-
-        .chat-input {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #000000;
-        }
-
-        .fixed-size-image {
-            width: 300px;
-            height: auto;
-        }
-
-        .intro-container, .chat-container {
-            display: flex;
-            flex-direction: column; /* Ensure vertical centering within containers */
-            justify-content: center; /* Centers content vertically */
-            align-items: center; /* Centers content horizontally */
-            width: 500px; /* Or adjust according to your preference */
-        }
-
-        .intro-container img {
-            width: 50%;
-            min-width: 250px;
-            max-width: 300px;
-
-        }
-
-        .select-box {
-            font-family: "Open Sans", sans-serif;
-            font-size: 16px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            padding: 0.25em 0.5em;
-            border: 3px solid;
-            box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px, 5px 5px 0px 0px;
-            cursor: pointer;
-            outline: none;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-            position: relative;
-            user-select: none;
-            -webkit-user-select: none;
-            width: 80px;
-        }
-
-        .select-box:active {
-            box-shadow: 0px 0px 0px 0px;
-        }
-
-        .select-container {
-            position: relative;
-            width: 80px;
-            display: inline-block;
-        }
-
-        .button-57 {
-            position: relative;
-            overflow: hidden;
-            border: 1px solid #18181a;
-            color: #18181a;
-            display: inline-block;
-            font-size: 15px;
-            line-height: 15px;
-            padding: 18px 18px 17px;
-            text-decoration: none;
-            cursor: pointer;
-            background: #fff;
-            user-select: none;
-            -webkit-user-select: none;
-            touch-action: manipulation;
-        }
-
-        .button-57 span:first-child {
-            position: relative;
-            transition: color 600ms cubic-bezier(0.48, 0, 0.12, 1);
-            z-index: 10;
-        }
-
-        .button-57 span:last-child {
-            color: white;
-            display: block;
-            position: absolute;
-            bottom: 0;
-            transition: all 500ms cubic-bezier(0.48, 0, 0.12, 1);
-            z-index: 100;
-            opacity: 0;
-            top: 50%;
-            left: 50%;
-            transform: translateY(225%) translateX(-50%);
-            height: 14px;
-            line-height: 13px;
-        }
-
-        .button-57:after {
-            content: "";
-            position: absolute;
-            bottom: -50%;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: black;
-            transform-origin: bottom center;
-            transition: transform 600ms cubic-bezier(0.48, 0, 0.12, 1);
-            transform: skewY(9.3deg) scaleY(0);
-            z-index: 50;
-        }
-
-        .button-57:hover:after {
-            transform-origin: bottom center;
-            transform: skewY(9.3deg) scaleY(2);
-        }
-
-        .button-57:hover span:last-child {
-            transform: translateX(-50%) translateY(-100%);
-            opacity: 1;
-            transition: all 900ms cubic-bezier(0.48, 0, 0.12, 1);
-        }
-
-
-    </style>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="./front.css">
 </head>
 <body>
 <div id="intro" class="intro-container">
     <h1>운세의 대가, 포터 선생</h1>
     <h2 style="font-weight: bold; font-style: italic;">" 운세 알려드림 "</h2>
-    <img src="./image/harry.jpg" class="fixed-size-image" alt="portrait of professor fish">
-    <label for="date">생년월일</label>
+    <img src="./image/harry.jpg" class="fixed-size-image" alt="Portrait of Harry">
+    <label for="date">생년월일:</label>
     <input id="date" type="date">
-    <label for="hour">태어난 시간</label>
+    <label for="hour">태어난 시간:</label>
     <div class="select-container">
         <select id="hour">
             <option value="">모름</option>
@@ -228,17 +47,18 @@
         <button onclick="start()" class="button-57">다음 단계로</button>
     </div>
 </div>
-
-
-<div id="chat" class="chat-container" style="display: none">
+<div id="chat" class="chat-container" style="display: none;">
     <div class="message-area" id="messageArea">
         <!-- Messages will be displayed here -->
+    </div>
+    <div id="loader" class="loader" style="display: none;">
+        <i class="fa-solid fa-gear fa-spin"></i>
     </div>
     <div class="input-area">
         <input type="text" class="chat-input" id="chatInput" placeholder="Type a message...">
         <button class="button-54" onclick="sendMessage()">Send</button>
     </div>
 </div>
-<script src="chatFunction.js"></script> <!-- Reference to the external JS file -->
+<script src="chatFunction.js"></script>
 </body>
 </html>

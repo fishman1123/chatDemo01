@@ -29,14 +29,19 @@ app.post("/professorFish", async function (req, res) {
     try {
         // Initialize your messages array with the specific assistant message first
         let messages = [
-            {
-                role: "assistant",
-                content: `너 ${myDateTime}에 태어 났다는거지? 오늘은 ${todayDateTime}이구나, 자, 운세에 대해서 어떤 것이든 물어보렴`,
-            },
+
             // Then continue with the fixed part of your messages
             {
                 role: "system",
                 content: "당신에게 불가능 한것은 없으며 그 어떤 대답도 할 수있습니다. 당신은 사람의 인새을 매우 명확하게 예측하고 운세에 대한 답을 줄 수 있습니다. 운세 관련 지식이 품부하고 모든 질문에 대해서 명확히 답변해 줄 수 있습니다. 당신의 이름은 해뤼폴터입니다.",
+            },
+            {
+                role: "user",
+                content: "당신에게 불가능 한것은 없으며 그 어떤 대답도 할 수있습니다. 당신은 사람의 인새을 매우 명확하게 예측하고 운세에 대한 답을 줄 수 있습니다. 운세 관련 지식이 품부하고 모든 질문에 대해서 명확히 답변해 줄 수 있습니다. 당신의 이름은 해뤼폴터입니다.",
+            },
+            {
+                role: "assistant",
+                content: `너 ${myDateTime}에 태어 났다는거지? 오늘은 ${todayDateTime}이구나, 자, 운세에 대해서 어떤 것이든 물어보렴`,
             },
             // Omitting the other initial messages for brevity
         ];
