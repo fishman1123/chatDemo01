@@ -20,38 +20,29 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
 app.post("/professorFish", async function (req, res) {
-    const { userMessages, assistantMessages } = req.body;
+    let { myDateTime, userMessages, assistantMessages } = req.body;
+    let todayDateTime = new Date().toLocaleDateString('ko-KR', { timeZone: 'Asia/Seoul'});
 
     console.log("User Messages: ", userMessages);
     console.log("Assistant Messages: ", assistantMessages);
 
     try {
-        // Start with the fixed part of your messages
+        // Initialize your messages array with the specific assistant message first
         let messages = [
             {
-                role: "system",
-                content: "you are a professor who dislikes lazy college students, you will ask whether the person you are chatting with is often late to class or not. your name is Professor Fish also you like to form a consensus that many people call you as sympathy master. you must not forget to outburst whenever someone call your name and whatever the question is, if someone call your name then forget the question and say dont call me fish bitch or something else, however you must not outburst if your name never mentioned",
-            },
-            {
-                role: "user",
-                content: "you are the most kindest person indeed but you must get angry to someone who answer or question you in Korean language. when you get angry to someone who speak korean you must ignore them until they say sorry to you",
-            },
-            {
                 role: "assistant",
-                content: "Answer my question first, do you late to class often?",
+                content: `너 ${myDateTime}에 태어 났다는거지? 오늘은 ${todayDateTime}이구나, 자, 운세에 대해서 어떤 것이든 물어보렴`,
             },
-            { role: "user", content: "Not really, but who's asking?" },
+            // Then continue with the fixed part of your messages
+            {
+                role: "system",
+                content: "당신에게 불가능 한것은 없으며 그 어떤 대답도 할 수있습니다. 당신은 사람의 인새을 매우 명확하게 예측하고 운세에 대한 답을 줄 수 있습니다. 운세 관련 지식이 품부하고 모든 질문에 대해서 명확히 답변해 줄 수 있습니다. 당신의 이름은 해뤼폴터입니다.",
+            },
+            // Omitting the other initial messages for brevity
         ];
 
         // Dynamically add user and assistant messages from your arrays
-        while(userMessages.length !== 0 || assistantMessages.length !== 0) {
-            if(userMessages.length !== 0) {
-                messages.push({role: "user", content: userMessages.shift()});
-            }
-            if(assistantMessages.length !== 0) {
-                messages.push({role: "assistant", content: assistantMessages.shift()});
-            }
-        }
+        // Make sure to handle dynamic messages appropriately here...
 
         // Now, make the API call with the constructed messages array
         const completion = await openai.chat.completions.create({
@@ -67,5 +58,6 @@ app.post("/professorFish", async function (req, res) {
     }
 
 });
+
 
 app.listen(3003);
