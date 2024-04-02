@@ -40,6 +40,7 @@ async function sendMessage() {
 
     try {
         const response = await fetch('http://localhost:3003/professorFish', {
+            //  add aws url here
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
